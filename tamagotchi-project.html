@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tamagotchi pet game: Multimedia Portfolio</title>
+<meta name="description" content="A Tamagotchi pet game by Christa Magat: a menu-driven Java console program with its source code, plus a working browser version you can play.">
+
+<link rel="preload" href="symphony-fonts/bricolage-grotesque-500-latin.a97804dc.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="symphony-fonts/ibm-plex-sans-400-latin.e2291e84.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="css/styles.6973180f.css"><style>#wixheadless-banner-container{display:none!important}</style></head><body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+<aside class="rail" aria-label="Profile"><div class="rail-top"><a class="avatar-link" href="index.html" aria-label="Christa Magat, home"><img class="avatar" src="images/profile.png" alt="Portrait of Christa Magat" width="112" height="112" decoding="async" loading="lazy"></a><p class="rail-name">Christa Magat</p><p class="rail-role">IT student</p><button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button><nav id="site-nav" aria-label="Main"><ul><li><a href="index.html"><span class="n">01</span>Home</a></li><li><a href="about.html"><span class="n">02</span>About</a></li><li><a href="skills.html"><span class="n">03</span>Skills</a></li><li><a href="projects.html" aria-current="page"><span class="n">04</span>Projects</a></li></ul></nav></div><div class="rail-foot"><a class="rail-gh btn ghost" data-github href="https://github.com/cbmagazine" target="_blank" rel="noopener">GitHub</a><button class="to-top" type="button">Back to top</button></div></aside>
+<main id="main" class="col"><figure class="banner"><img src="images/banner.svg" alt="" width="1200" height="300" decoding="async" fetchpriority="high"></figure><h1 class="page-h">Tamagotchi pet game</h1><p class="lead">A menu-driven pet game I wrote in Java, with a browser version you can play here. Pick and name a pet, then feed it, play with it or take it for a walk to keep its hunger and happiness in balance.</p><p class="actions"><a class="btn" href="#game">Play now</a></p><figure class="banner"><img src="images/terminal.svg" alt="" width="600" height="300" loading="lazy" decoding="async"></figure><h2>Java source code</h2><pre class="code" tabindex="0"><code>import java.util.Scanner;
+
+public class Tamagotchi {
+    static final int MAX = 10;
+    static int hunger = 5;
+    static int happiness = 5;
+    static String petType = &quot;Cat&quot;;
+    static String petName = &quot;Buddy&quot;;
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        choosePet(in);
+        boolean running = true;
+        while (running) {
+            System.out.println();
+            System.out.println(&quot;1. Feed&quot;);
+            System.out.println(&quot;2. Play&quot;);
+            System.out.println(&quot;3. Walk&quot;);
+            System.out.println(&quot;4. Check status&quot;);
+            System.out.println(&quot;5. Change pet&quot;);
+            System.out.println(&quot;6. Restart&quot;);
+            System.out.println(&quot;0. Quit&quot;);
+            System.out.print(&quot;Choose: &quot;);
+            String choice = in.nextLine().trim();
+            switch (choice) {
+                case &quot;1&quot;: feed(); break;
+                case &quot;2&quot;: play(); break;
+                case &quot;3&quot;: walk(); break;
+                case &quot;4&quot;: status(); break;
+                case &quot;5&quot;: choosePet(in); break;
+                case &quot;6&quot;:
+                    hunger = 5;
+                    happiness = 5;
+                    choosePet(in);
+                    break;
+                case &quot;0&quot;: running = false; break;
+                default: System.out.println(&quot;Pick a number from the menu.&quot;);
+            }
+        }
+        System.out.println(&quot;Goodbye, &quot; + petName + &quot;!&quot;);
+        in.close();
+    }
+
+    static void choosePet(Scanner in) {
+        System.out.println(&quot;Choose a pet:&quot;);
+        System.out.println(&quot;1. Cat&quot;);
+        System.out.println(&quot;2. Dog&quot;);
+        System.out.println(&quot;3. Chicken&quot;);
+        System.out.println(&quot;4. Dragon&quot;);
+        System.out.println(&quot;5. Custom&quot;);
+        System.out.print(&quot;Choose: &quot;);
+        String choice = in.nextLine().trim();
+        switch (choice) {
+            case &quot;2&quot;: petType = &quot;Dog&quot;; break;
+            case &quot;3&quot;: petType = &quot;Chicken&quot;; break;
+            case &quot;4&quot;: petType = &quot;Dragon&quot;; break;
+            case &quot;5&quot;: petType = askText(in, &quot;What kind of pet is it? &quot;); break;
+            default: petType = &quot;Cat&quot;;
+        }
+        petName = askText(in, &quot;Pet name (1 to 20 letters, numbers or spaces): &quot;);
+        System.out.println(&quot;Hello, &quot; + petName + &quot; the &quot; + petType + &quot;!&quot;);
+    }
+
+    // Keeps asking until the answer is 1 to 20 letters, numbers or spaces.
+    static String askText(Scanner in, String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            String text = in.nextLine().trim();
+            if (text.matches(&quot;[A-Za-z0-9 ]{1,20}&quot;)) {
+                return text;
+            }
+            System.out.println(&quot;Please type 1 to 20 letters, numbers or spaces.&quot;);
+        }
+    }
+
+    static void feed() {
+        if (hunger == 0) {
+            System.out.println(petName + &quot; is already full. Try playing instead.&quot;);
+        } else {
+            hunger--;
+            System.out.println(petName + &quot; enjoyed a snack. Hunger is now &quot; + hunger + &quot;.&quot;);
+        }
+    }
+
+    static void play() {
+        boolean hungerAtMax = hunger == MAX;
+        boolean happyAtMax = happiness == MAX;
+        hunger = Math.min(MAX, hunger + 1);
+        happiness = Math.min(MAX, happiness + 1);
+        if (hungerAtMax &amp;&amp; happyAtMax) {
+            System.out.println(&quot;Hunger and happiness are both at their maximum, so they stay at 10.&quot;);
+        } else if (hungerAtMax) {
+            System.out.println(&quot;Hunger is at its maximum, so it stays at 10. Happiness is now &quot; + happiness + &quot;.&quot;);
+        } else if (happyAtMax) {
+            System.out.println(&quot;Happiness is already at its maximum. Hunger is now &quot; + hunger + &quot;.&quot;);
+        } else {
+            System.out.println(&quot;You played together. Happiness is now &quot; + happiness + &quot;, hunger is now &quot; + hunger + &quot;.&quot;);
+        }
+    }
+
+    static void walk() {
+        boolean hungerAtMax = hunger == MAX;
+        boolean happyAtZero = happiness == 0;
+        hunger = Math.min(MAX, hunger + 1);
+        happiness = Math.max(0, happiness - 1);
+        if (hungerAtMax &amp;&amp; happyAtZero) {
+            System.out.println(&quot;Hunger is at its maximum and happiness is at 0, so nothing changes.&quot;);
+        } else if (hungerAtMax) {
+            System.out.println(&quot;Hunger is at its maximum, so it stays at 10. Happiness is now &quot; + happiness + &quot;.&quot;);
+        } else if (happyAtZero) {
+            System.out.println(&quot;Happiness is already at 0, so it stays there. Hunger is now &quot; + hunger + &quot;.&quot;);
+        } else {
+            System.out.println(&quot;You went for a walk. Hunger is now &quot; + hunger + &quot;, happiness is now &quot; + happiness + &quot;.&quot;);
+        }
+    }
+
+    static void status() {
+        System.out.println(petName + &quot; the &quot; + petType);
+        System.out.println(&quot;Hunger:    &quot; + bar(hunger));
+        System.out.println(&quot;Happiness: &quot; + bar(happiness));
+    }
+
+    static String bar(int value) {
+        StringBuilder b = new StringBuilder();
+        for (int i = 0; i &lt; MAX; i++) {
+            b.append(i &lt; value ? &quot;#&quot; : &quot;-&quot;);
+        }
+        return b + &quot; &quot; + value + &quot;/10&quot;;
+    }
+}
+</code></pre><h2>How to run it</h2><ol class="rows"><li><span class="n">01</span><span>Save the code as Tamagotchi.java.</span></li><li><span class="n">02</span><span>Compile it with javac Tamagotchi.java.</span></li><li><span class="n">03</span><span>Run it with java Tamagotchi, then pick a number from the menu.</span></li></ol><figure class="banner"><img src="images/pets.svg" alt="" width="600" height="200" loading="lazy" decoding="async"></figure><h2>Browser version</h2><p>This version follows the same rules as the Java program, written in JavaScript so you can play it here. It is not the Java program itself.</p><h3>The rules</h3><ol class="rows"><li><span class="n">01</span><span>Both meters start at 5.</span></li><li><span class="n">02</span><span>Feed lowers hunger by 1.</span></li><li><span class="n">03</span><span>Play raises hunger by 1 and happiness by 1.</span></li><li><span class="n">04</span><span>Walk raises hunger by 1 and lowers happiness by 1.</span></li><li><span class="n">05</span><span>Each meter stays between 0 and 10.</span></li></ol><figure class="banner"><img src="images/meters.svg" alt="" width="600" height="200" loading="lazy" decoding="async"></figure><div class="game" id="game"><form id="pet-form" class="pet-form" novalidate><fieldset><legend>Choose your pet</legend><div class="pet-options"><label class="pet-opt"><input type="radio" name="pet" value="cat" checked><span>Cat</span></label><label class="pet-opt"><input type="radio" name="pet" value="dog"><span>Dog</span></label><label class="pet-opt"><input type="radio" name="pet" value="chicken"><span>Chicken</span></label><label class="pet-opt"><input type="radio" name="pet" value="dragon"><span>Dragon</span></label><label class="pet-opt"><input type="radio" name="pet" value="custom"><span>Custom</span></label></div><div class="field" id="custom-kind-wrap" hidden><label for="pet-kind">What kind of pet is it? (1 to 20 letters, numbers or spaces)</label><input id="pet-kind" type="text" maxlength="20" autocomplete="off"></div><div class="field"><label for="pet-name-input">Pet name (required, 1 to 20 letters, numbers or spaces)</label><input id="pet-name-input" type="text" maxlength="20" autocomplete="nickname" required aria-required="true" aria-describedby="form-error"></div></fieldset><p id="form-error" class="form-error" role="alert" hidden></p><p class="actions"><button class="btn" type="submit">Start</button></p></form><div id="game-play" hidden><div class="pet-stage"><p class="pet-art" id="pet-art" aria-hidden="true"></p><svg id="pet-paw" class="pet-svg" viewBox="0 0 64 64" width="96" height="96" aria-hidden="true" hidden><ellipse cx="32" cy="42" rx="14" ry="11" fill="#c4b5fd"/><ellipse cx="14" cy="26" rx="6" ry="8" fill="#a78bfa"/><ellipse cx="26" cy="16" rx="6" ry="8" fill="#a78bfa"/><ellipse cx="38" cy="16" rx="6" ry="8" fill="#a78bfa"/><ellipse cx="50" cy="26" rx="6" ry="8" fill="#a78bfa"/></svg><p class="pet-title" id="pet-title"></p></div><div class="meter"><p class="meter-label">Hunger: <span id="num-hunger">5</span> of 10</p><div class="segments" id="seg-hunger" aria-hidden="true"></div></div><div class="meter"><p class="meter-label">Happiness: <span id="num-happiness">5</span> of 10</p><div class="segments" id="seg-happiness" aria-hidden="true"></div></div><div class="game-menu" role="group" aria-label="Pet menu"><button class="btn" type="button" id="act-feed">1. Feed</button><button class="btn" type="button" id="act-play">2. Play</button><button class="btn" type="button" id="act-walk">3. Walk</button><button class="btn" type="button" id="act-status">4. Check status</button><button class="btn" type="button" id="act-change">5. Change pet</button><button class="btn" type="button" id="act-restart">6. Restart</button><button class="btn" type="button" id="act-quit">0. Quit</button></div></div><p id="game-msg" class="game-msg" role="status" aria-live="polite"></p></div><p class="back"><a class="btn ghost" href="projects.html">All projects</a></p>
+</main></div>
+<footer class="foot"><p>Personal IT portfolio. Built to show my work.</p><p><a href="index.html">Home</a> &middot; <a href="about.html">About</a> &middot; <a href="skills.html">Skills</a> &middot; <a href="projects.html">Projects</a> &middot; <a href="cisco-certificate.html">Certificates</a> &middot; <a href="sql-sandbox.html">SQL sandbox</a> &middot; <a href="tamagotchi-project.html">Pet game</a> &middot; <a href="multimedia-project.html">Multimedia</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="https://github.com/cbmagazine" target="_blank" rel="noopener">GitHub</a> &middot; <a href="https://github.com/cbmagazine/magat-portfolio" target="_blank" rel="noopener">Portfolio repository</a></p><a href="https://www.symphony.co" target="_blank" rel="noopener" class="sym-badge" data-symphony-badge>Built with Symphony.co</a></footer>
+<script src="js/site.3ba1c292.js" defer></script><script src="js/tamagotchi.8da855b8.js" defer></script>
+</body></html>

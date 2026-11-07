@@ -1,4 +1,4 @@
-# Christa Magat Portfolio: XAMPP and hosting guide
+# Magat Portfolio: XAMPP and hosting guide
 
 This folder is the full portfolio site as plain files (HTML, CSS, JavaScript, images, fonts and PDFs). It needs no database and no build step. All links are relative, so it works from any folder.
 
@@ -8,28 +8,28 @@ The live version is at https://headless-cuvtksyqkvs-christamagat50107-1411.wix-s
 
 1. Install XAMPP from https://www.apachefriends.org and open the XAMPP Control Panel.
 2. Click Start next to Apache. MySQL is not needed.
-3. Unzip christa-portfolio.zip. You get one folder named christa-portfolio.
+3. Unzip magat-portfolio.zip. You get one folder named magat-portfolio.
 4. Copy that folder into the htdocs folder. On Windows this is usually C:\xampp\htdocs\. On macOS it is /Applications/XAMPP/htdocs/. On Linux it is /opt/lampp/htdocs/.
-5. Open http://localhost/christa-portfolio/ in your browser. The home page opens.
+5. Open http://localhost/magat-portfolio/ in your browser. The home page opens.
 6. Check the other pages from the menu: About, Skills, Projects, the SQL sandbox, the pet game and Certificates.
 
 ### If something does not work
 
 - The page says "Not found": the folder is not directly inside htdocs, or its name differs from the address. The address must match the folder name.
-- Apache will not start: another program uses port 80. Close Skype or IIS, or change the port in XAMPP (Config, then Service and Port Settings). Then use http://localhost:8080/christa-portfolio/.
+- Apache will not start: another program uses port 80. Close Skype or IIS, or change the port in XAMPP (Config, then Service and Port Settings). Then use http://localhost:8080/magat-portfolio/.
 - Styles look old after an edit: press Ctrl+F5 (Cmd+Shift+R on Mac) to reload without the cache.
 - Double-clicking index.html also shows the pages, but fonts are more reliable through http://localhost/.
 
 ## 2. Put it online
 
 - The live Wix address above is already online. Symphony publishes updates there, so ask Symphony for a change and it goes live on that address.
-- GitHub Pages (free): create a repository, upload the contents of the christa-portfolio folder to it, then turn on Pages in the repository settings. The address will be https://YOUR-NAME.github.io/REPOSITORY/. Links are relative, so this works.
-- Netlify (free): drag the christa-portfolio folder onto https://app.netlify.com/drop. You get an address right away.
+- GitHub Pages (free): create a repository, upload the contents of the magat-portfolio folder to it, then turn on Pages in the repository settings. The address is https://cbmagazine.github.io/magat-portfolio/ (GitHub Pages is already on for the main branch). Links are relative, so this works.
+- Netlify (free): drag the magat-portfolio folder onto https://app.netlify.com/drop. You get an address right away.
 - Any web host: upload the folder contents to its public folder (often public_html) with FTP.
 
 ## 3. Folder structure
 
-    christa-portfolio/
+    magat-portfolio/
       index.html                  Home
       about.html                  About me, What I Bring
       skills.html                 What I Work With, What I Want to Learn Next
@@ -81,7 +81,7 @@ The "Portfolio repository" button on the site links to this repository: https://
 
 1. Install Git from https://git-scm.com and sign in to GitHub.
 2. On GitHub, create an empty repository named magat-portfolio under cbmagazine. Do not add a README or a license there.
-3. Open a terminal inside the christa-portfolio folder (the one with index.html) and run:
+3. Open a terminal inside the magat-portfolio folder (the one with index.html) and run:
 
         git init -b main
         git add .

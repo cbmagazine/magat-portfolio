@@ -2,8 +2,6 @@
 
 This folder is the full portfolio site as plain files (HTML, CSS, JavaScript, images, fonts and PDFs). It needs no database and no build step. All links are relative, so it works from any folder.
 
-The live version is at https://headless-cuvtksyqkvs-christamagat50107-1411.wix-site-host.com/
-
 ## 1. Run it on XAMPP (step by step)
 
 1. Install XAMPP from https://www.apachefriends.org and open the XAMPP Control Panel.
@@ -22,10 +20,8 @@ The live version is at https://headless-cuvtksyqkvs-christamagat50107-1411.wix-s
 
 ## 2. Put it online
 
-- The live Wix address above is already online. Symphony publishes updates there, so ask Symphony for a change and it goes live on that address.
-- GitHub Pages (free): create a repository, upload the contents of the magat-portfolio folder to it, then turn on Pages in the repository settings. The address is https://cbmagazine.github.io/magat-portfolio/ (GitHub Pages is already on for the main branch). Links are relative, so this works.
+- GitHub Pages (free): create a repository, upload the contents of the magat-portfolio folder to it, then turn on Pages in the repository settings. The address is https://cbmagazine.github.io/magat-portfolio/ (GitHub Pages is already on for the main branch).
 - Netlify (free): drag the magat-portfolio folder onto https://app.netlify.com/drop. You get an address right away.
-- Any web host: upload the folder contents to its public folder (often public_html) with FTP.
 
 ## 3. Folder structure
 
@@ -54,7 +50,7 @@ The live version is at https://headless-cuvtksyqkvs-christamagat50107-1411.wix-s
 ## 4. Important settings and notes
 
 - Fonts: Bricolage Grotesque and IBM Plex Sans are stored in symphony-fonts, so no internet is needed for text.
-- Needs internet: the "Open the multimedia portfolio" button (https://cbmagazine.wixsite.com/online-portfolio-mm), the GitHub buttons (https://github.com/cbmagazine and https://github.com/cbmagazine/magat-portfolio) and the "Built with Symphony.co" badge link.
+- Needs internet: the "Open the multimedia portfolio" button (https://cbmagazine.wixsite.com/online-portfolio-mm), the GitHub buttons (https://github.com/cbmagazine and https://github.com/cbmagazine/magat-portfolio).
 - Base path: all links are relative, so the folder can have any name and sit in any subfolder. Do not add a leading slash to links.
 - MIME types: Apache in XAMPP already serves .woff2, .svg, .pdf and .js correctly. On another server, make sure .woff2 is served as font/woff2.
 - Caching: file names in css, js and symphony-fonts carry a code (for example styles.6973180f.css). If you edit a file and keep its name, force a refresh. If you rename it, update the link in each HTML file.
@@ -62,7 +58,6 @@ The live version is at https://headless-cuvtksyqkvs-christamagat50107-1411.wix-s
 - Where to edit colours and sizes: css/styles.6973180f.css. The colours are near the top, under :root. The home name size is in the last blocks of the file.
 - The multimedia page shows a screenshot of the online portfolio (images/mm-portfolio.jpg) and a button that opens the live portfolio. Replace that image file to change the screenshot.
 - The SQL sandbox and the pet game run in the browser with the files in js/. They need no server software.
-- The Symphony badge sits in the footer of every page. Keep it unless you move the site to your own host and choose to remove it.
 
 ## 5. Quick test list
 
